@@ -80,10 +80,10 @@ python3 simpleML.py
 
 No download needed, the dataset ships with sklearn.
 
-## Next steps
+## Summary of what I learned
 
-Extending this into a federated setup: partition the data across simulated
-clients, train a local model on each, and aggregate the weights with FedAvg
-rather than pooling the raw data. The pipeline above is the per-client piece.
-The federated part adds the aggregation loop on top of it, and the interesting
-problem is what happens when clients hold non-identical data distributions.
+AI is the broad field of getting machines to do things that normally need human intelligence. Machine learning sits inside it as the specific idea of learning patterns from data instead of following rules a programmer wrote by hand. Deep learning sits inside machine learning and uses neural networks with many hidden layers. The logistic regression model here is machine learning but not deep learning since it is really just one layer of weights mapping inputs to outputs.
+
+Supervised learning means every input comes with the correct answer attached so the model can compare its guess against the truth and adjust. Unsupervised means there are no answers and the model has to find structure on its own. Classification vs regression comes down to what you are predicting. Power demand in megawatts is a continuous number so that is regression. Bucketing demand into High Medium or Low makes it classification.
+
+Federated learning was the part most relevant to this project. You cannot just pool everything on one server because a lot of data legally cannot move. Patient records are protected and utility customer data is restricted. So instead of bringing the data to the model you bring the model to the data. Each client trains locally and only sends back the updated weights and the server averages those weights into a new global model which is FedAvg. The hard part is non-IID data. One substation serving a busy city and another serving a rural area with solar panels have very different usage patterns so each client learns something that fits its own data and averaging those models means they pull in different directions. That gives slower convergence and less stable training than centralized. It seems to be one of the biggest open problems in the field and it is the piece I want to understand better once I start running the federated code.
